@@ -4,11 +4,12 @@ import { theme } from "constants/index";
 const { colors } = theme;
 
 export const FormLabelS = styled.label`
+	display: block;
 	margin: 0 0 2rem;
-	color: ${({ color, error, isFocused, isHovered }) => {
+	color: ${({ color, error, isHovered, isFocused }) => {
 		if (error || isFocused || isHovered) {
 			if (isHovered && !isFocused) {
-				return colors.dark01;
+				return colors.orange0;
 			}
 
 			if (error) {
@@ -16,7 +17,7 @@ export const FormLabelS = styled.label`
 			}
 
 			if (!error && isFocused) {
-				return colors.royalBlue;
+				return colors.orange0;
 			}
 		} else {
 			return color || colors.dark01;

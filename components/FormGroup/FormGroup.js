@@ -1,5 +1,5 @@
 import React, { useState, useCallback } from "react";
-import FormContext from "components/FormContext";
+import FormContext from "Context/FormContext";
 import { FormGroupS } from "./styled";
 
 export const FormGroupHandlerContext = React.createContext(null);
@@ -9,18 +9,20 @@ export default function FormGroup(props) {
 
 	const [ctxState, setCtx] = useState({
 		controlId,
-		isFocused: false,
 		isHovered: false,
+		isFocused: false,
 	});
 
-	const setCtxHandler = useCallback((value) => setCtx(value), []);
+	const ctxHandler = useCallback((ctx) => setCtx(ctx), []);
 
 	const UI = (
-		<FormContext.Provider value={ctxState}>
-			<FormGroupHandlerContext.Provider value={setCtxHandler}>
-				<FormGroupS noMargin={noMargin}>{children}</FormGroupS>
+		<FormGroupS noMargin={noMargin}>
+			<FormGroupHandlerContext.Provider value={ctxHandler}>
+				<FormContext.Provider value={ctxState}>
+					{children}
+				</FormContext.Provider>
 			</FormGroupHandlerContext.Provider>
-		</FormContext.Provider>
+		</FormGroupS>
 	);
 
 	return UI;

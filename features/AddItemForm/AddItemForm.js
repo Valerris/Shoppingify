@@ -2,7 +2,7 @@ import { useState, useRef, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { FormS } from "./styled";
 import FormGroup from "components/FormGroup";
-import Input from "components/Input";
+import Input from "components/Controls/Input";
 import Button from "components/Button";
 import ButtonGroup from "components/ButtonGroup";
 import { addItem } from "features/MainList/reducer/slice";
@@ -30,7 +30,7 @@ export default function AddItemForm(props) {
 		<FormS>
 			<h3>Add a new item</h3>
 
-			<FormGroup>
+			<FormGroup controlId="name">
 				<Input
 					ref={firstInputRef}
 					label="Name"
@@ -44,7 +44,7 @@ export default function AddItemForm(props) {
 				/>
 			</FormGroup>
 
-			<FormGroup>
+			<FormGroup controlId="note">
 				<Input
 					type="textarea"
 					rows="5"
@@ -59,7 +59,7 @@ export default function AddItemForm(props) {
 				/>
 			</FormGroup>
 
-			<FormGroup>
+			<FormGroup controlId="image">
 				<Input
 					label="Image (optional)"
 					placeholder="Enter a url"
@@ -72,7 +72,7 @@ export default function AddItemForm(props) {
 				/>
 			</FormGroup>
 
-			<FormGroup>
+			<FormGroup controlId="category">
 				<Input
 					ref={selectRef}
 					type="select"

@@ -1,6 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import FormGroup from "components/FormGroup";
-import Input from "components/Input";
+import Input from "components/Controls/Input";
 
 export default function SearchForm() {
 	const ref = useRef();
@@ -9,17 +8,16 @@ export default function SearchForm() {
 	useEffect(() => ref.current.focus(), []);
 
 	const UI = (
-		<FormGroup controlId="search">
-			<Input
-				ref={ref}
-				fullWidth
-				startIcon="search"
-				size="sm"
-				placeholder="search item"
-				value={value}
-				onChange={({ target: { value } }) => setValue(value)}
-			/>
-		</FormGroup>
+		<Input
+			ref={ref}
+			id="search"
+			fullWidth
+			size="sm"
+			startIcon="search"
+			placeholder="search item"
+			value={value}
+			onChange={({ target: { value } }) => setValue(value)}
+		/>
 	);
 
 	return UI;

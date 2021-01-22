@@ -40,6 +40,7 @@ const GlobalStyled = createGlobalStyle`
 
     header {
         display: flex;
+        align-items: flex-start;
         margin: 0 0 14.5rem;
     }
 

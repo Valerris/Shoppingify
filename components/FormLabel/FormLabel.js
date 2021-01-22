@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import FormContext from "components/FormContext";
+import FormContext from "Context/FormContext";
 import { FormLabelS } from "./styled";
 
 export default function FormLabel(props) {
@@ -9,9 +9,9 @@ export default function FormLabel(props) {
 
 	const UI = (
 		<FormLabelS
-			htmlFor={htmlFor || controlId}
-			isFocused={isFocused}
+			htmlFor={controlId || htmlFor}
 			isHovered={isHovered}
+			isFocused={isFocused}
 			error={error}
 		>
 			{children}

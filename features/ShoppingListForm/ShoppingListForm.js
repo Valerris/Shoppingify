@@ -4,7 +4,7 @@ import { FormS, ShoppingListFormS } from "./styled";
 import ButtonGroup from "components/ButtonGroup";
 import Button from "components/Button";
 import FormGroup from "components/FormGroup";
-import Input from "components/Input";
+import Input from "components/Controls/Input";
 import {
 	STATUSES,
 	addTitle,
