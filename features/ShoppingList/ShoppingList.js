@@ -1,15 +1,19 @@
 import { useSelector } from "react-redux";
-import { ShoppingListS, ShoppingListCategoryS } from "./styled";
+import {
+	ShoppingListS,
+	ShoppingListHeaderS,
+	ShoppingListCategoryS,
+} from "./styled";
 import ShoppingListItem from "features/ShoppingList/components/ShoppingListItem";
 import Button from "components/Button";
 
 export default function ShoppingList() {
 	const { shoppingList } = useSelector((state) => state);
 
-	const hasItems = shoppingList.length > 0;
+	const hasItems = shoppingList.list.length > 0;
 
 	const shoppingListUI = hasItems
-		? shoppingList.map((el) => {
+		? shoppingList.list.map((el) => {
 				return (
 					<ShoppingListCategoryS key={el.category._id}>
 						<h5>{el.category.name}</h5>
@@ -28,21 +32,31 @@ export default function ShoppingList() {
 		  })
 		: "No items";
 
+	const headerUI = (
+		<ShoppingListHeaderS>
+			{shoppingList.title ? (
+				<h3>{shoppingList.title}</h3>
+			) : (
+				<>
+					<h3>Shopping list</h3>
+
+					<Button
+						round
+						variant="text"
+						icon="edit"
+						iconVariant="round"
+						onClick={(e) => console.log("clicked")}
+					/>
+				</>
+			)}
+		</ShoppingListHeaderS>
+	);
+
 	const UI = (
 		<ShoppingListS hasItems={hasItems}>
-			{hasItems ? <h3>Shopping list</h3> : null}
+			{hasItems ? headerUI : null}
 
 			{shoppingListUI}
-
-			{hasItems ? (
-				<Button
-					round
-					variant="text"
-					icon="edit"
-					iconVariant="round"
-					onClick={(e) => console.log("clicked")}
-				/>
-			) : null}
 		</ShoppingListS>
 	);
 

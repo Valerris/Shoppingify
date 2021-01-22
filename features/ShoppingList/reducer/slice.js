@@ -1,5 +1,4 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { v4 as uuid } from "uuid";
 import {
 	findCategoryIdx,
 	findCategoryObj,
@@ -8,28 +7,17 @@ import {
 
 const SLICE_NAME = "SHOPPING_LIST";
 
-const initialState = [
-	// {
-	// 	category: {
-	// 		_id: uuid(),
-	// 		name: "Fruit and vegetables",
-	// 	},
-	// 	items: [
-	// 		{ _id: uuid(), name: "Avocado", count: 3 },
-	// 		{ _id: uuid(), name: "Pre-cooked corn 450g", count: 3 },
-	// 	],
-	// },
-	// {
-	// 	category: {
-	// 		_id: uuid(),
-	// 		name: "Meat & Fish",
-	// 	},
-	// 	items: [
-	// 		{ _id: uuid(), name: "Avocado", count: 3 },
-	// 		{ _id: uuid(), name: "Pre-cooked corn 450g", count: 3 },
-	// 	],
-	// },
-];
+export const STATUSES = {
+	edit: "EDIT",
+	adjust: "ADJUST",
+	complete: "COMPLETE",
+};
+
+const initialState = {
+	title: undefined,
+	status: STATUSES.edit,
+	list: [],
+};
 
 const slice = createSlice({
 	name: SLICE_NAME,
@@ -38,7 +26,9 @@ const slice = createSlice({
 		incCount(state, action) {
 			const { id, category } = action.payload;
 
-			const categoryObj = findCategoryObj(state, category);
+			const list = state.list;
+
+			const categoryObj = findCategoryObj(list, category);
 
 			const itemObj = findItemById(categoryObj.items, id);
 
@@ -47,7 +37,9 @@ const slice = createSlice({
 		decCount(state, action) {
 			const { id, category } = action.payload;
 
-			const categoryObj = findCategoryObj(state, category);
+			const list = state.list;
+
+			const categoryObj = findCategoryObj(list, category);
 
 			const itemObj = findItemById(categoryObj.items, id);
 
@@ -58,26 +50,43 @@ const slice = createSlice({
 		addItem(state, action) {
 			const { category, item } = action.payload;
 
-			const categoryObj = findCategoryObj(state, category.name);
+			const list = state.list;
+
+			const categoryObj = findCategoryObj(list, category.name);
 
 			if (categoryObj) {
 				categoryObj.items.push(item);
 			} else {
-				state.push({ category, items: [item] });
+				list.push({ category, items: [item] });
 			}
 		},
 		removeItem(state, action) {
 			const { id, category } = action.payload;
 
-			const categoryIdx = findCategoryIdx(state, category);
+			const list = state.list;
 
-			state[categoryIdx].items = state[categoryIdx].items.filter(
+			const categoryIdx = findCategoryIdx(list, category);
+
+			list[categoryIdx].items = list[categoryIdx].items.filter(
 				(el) => el._id !== id
 			);
 
-			if (state[categoryIdx].items.length === 0) {
-				state.splice(categoryIdx, 1);
+			if (list[categoryIdx].items.length === 0) {
+				list.splice(categoryIdx, 1);
 			}
+		},
+		addTitle(state, action) {
+			const { title } = action.payload;
+
+			state.title = title;
+		},
+		removeTitle(state, action) {
+			state.title = undefined;
+		},
+		changeStatus(state, action) {
+			const { status } = action.payload;
+
+			state.status = status;
 		},
 	},
 });
@@ -87,6 +96,9 @@ export const {
 	decCount,
 	addItem,
 	removeItem,
+	addTitle,
+	removeTitle,
+	changeStatus,
 } = slice.actions;
 
 export default slice.reducer;

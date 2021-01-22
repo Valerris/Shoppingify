@@ -21,6 +21,10 @@ export const ShoppingListS = styled.section`
 			background: border-box center bottom / 70% no-repeat
 				url("/images/shopping.svg");
 		`}
+`;
+
+export const ShoppingListHeaderS = styled.div`
+	position: relative;
 
 	& > button {
 		position: absolute;

@@ -16,6 +16,7 @@ export const ShoppingListFormS = styled.div`
 export const FormS = styled.form`
 	display: flex;
 
-	border: 2px solid ${colors.orange0};
+	border: 2px solid
+		${({ disabled }) => (disabled ? colors.gray0 : colors.orange0)};
 	border-radius: calc(${sizes.radius2} + 3px);
 `;

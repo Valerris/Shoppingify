@@ -88,7 +88,7 @@ export default function ItemInfo(props) {
 							dispatch(
 								removeItem({
 									id: itemInfo._id,
-									category: itemInfo.category,
+									category: itemInfo.category.name,
 								})
 							);
 					}}

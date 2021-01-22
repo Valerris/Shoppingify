@@ -41,7 +41,7 @@ const modifierObj = {
 			"&:disabled": {
 				cursor: "not-allowed",
 				color: colors.white,
-				background: colors.gray0,
+				background: colors.white,
 			},
 		},
 		primary: {
