@@ -8,9 +8,9 @@ const { colors } = theme;
 export const InputBaseS = styled.input(calculatedStyles);
 
 // textarea
-const TextArea = styled.textarea(calculatedStyles);
+const TextAreaBase = styled.textarea(calculatedStyles);
 
-export const TextAreaS = styled(TextArea).attrs(({ rows }) => ({
+export const TextAreaS = styled(TextAreaBase).attrs(({ rows }) => ({
 	rows: rows || 3,
 }))`
 	overflow-wrap: break-word;

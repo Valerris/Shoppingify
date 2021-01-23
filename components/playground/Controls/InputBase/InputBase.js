@@ -1,6 +1,6 @@
 import React from "react";
 import { InputBaseS } from "./styled";
-import { withIcon } from "./utils";
+import { chooseType, withIcon } from "./utils";
 
 function InputBase(props, ref) {
 	const {
@@ -31,8 +31,10 @@ function InputBase(props, ref) {
 	} = props;
 
 	// < UI >
+	const ComponentType = chooseType(type);
+
 	const Component = (
-		<InputBaseS
+		<ComponentType
 			ref={ref}
 			id={id}
 			className={className}

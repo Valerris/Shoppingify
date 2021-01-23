@@ -53,9 +53,9 @@ export default function AddItemForm(props) {
 
 			<FormGroup controlId="note">
 				<Input
+					label="Note (optional)"
 					type="textarea"
 					rows="5"
-					label="Note (optional)"
 					placeholder="Enter a note"
 					variant="outline"
 					value={note}
