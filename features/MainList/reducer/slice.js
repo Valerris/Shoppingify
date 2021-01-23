@@ -122,15 +122,18 @@ const slice = createSlice({
 	initialState,
 	reducers: {
 		addItem(state, action) {
-			console.log(action.payload);
 			const { category, ...itemParams } = action.payload;
 
 			let categoryObj = findCategoryObj(state, category);
 
 			if (categoryObj) {
-				categoryObj.items.push(itemParams);
+				categoryObj.items.push({ ...itemParams, isVisible: true });
 			} else {
-				const newItem = { ...itemParams, _id: uuid() };
+				const newItem = {
+					...itemParams,
+					_id: uuid(),
+					isVisible: true,
+				};
 
 				categoryObj = {
 					category: {

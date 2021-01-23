@@ -3,13 +3,16 @@ import {
 	ShoppingListItemS,
 } from "./styled";
 import CountToggle from "features/ShoppingList/components/CountToggle";
+import Checkbox from "components/Controls/Checkbox";
 
 function ShoppingListItem(props) {
 	const { id, category, item, count } = props;
 
 	const UI = (
 		<ShoppingListItemContainerS>
-			<ShoppingListItemS>{item}</ShoppingListItemS>
+			<Checkbox id={id}>
+				<ShoppingListItemS>{item}</ShoppingListItemS>
+			</Checkbox>
 
 			<CountToggle count={count} id={id} category={category} />
 		</ShoppingListItemContainerS>

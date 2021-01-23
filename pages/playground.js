@@ -3,6 +3,7 @@ import PageContainer from "common/PageContainer";
 import FormGroup from "components/FormGroup";
 import Input from "components/playground/Controls/Input";
 import Select from "components/playground/Controls/Select";
+import Checkbox from "components/playground/Controls/Checkbox";
 
 const mock = [
 	{
@@ -54,7 +55,7 @@ export default function PlaygroundPage() {
 						/>
 					</FormGroup> */}
 
-					<FormGroup controlId="select">
+					{/* <FormGroup controlId="select">
 						<Select
 							label="Label"
 							hint="Hint"
@@ -62,7 +63,9 @@ export default function PlaygroundPage() {
 							variant="outline"
 							options={mock}
 						/>
-					</FormGroup>
+					</FormGroup> */}
+
+					<Checkbox id="checkbox">Checkbox</Checkbox>
 				</div>
 			</div>
 		</PageContainer>
