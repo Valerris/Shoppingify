@@ -5,7 +5,6 @@ const { colors, sizes, shadows } = theme;
 // input styles
 const baseObj = {
 	all: "unset",
-	alignSelf: "flex-start",
 	display: "block",
 	boxSizing: "border-box",
 	color: colors.dark01,

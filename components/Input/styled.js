@@ -1,5 +1,5 @@
-import { theme } from "constants/index";
 import styled from "styled-components";
+import { theme } from "constants/index";
 import calculatedStyles from "./styles";
 
 const { colors, sizes, shadows, indexes } = theme;
@@ -38,7 +38,7 @@ export const OptionsContainerS = styled.ul`
 `;
 
 export const OptionS = styled.li.attrs((props) => ({
-	tabIndex: 1,
+	tabIndex: true,
 }))`
 	all: unset;
 	display: block;

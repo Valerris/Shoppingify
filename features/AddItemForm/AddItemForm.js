@@ -5,12 +5,20 @@ import FormGroup from "components/FormGroup";
 import Input from "components/Controls/Input";
 import Button from "components/Button";
 import ButtonGroup from "components/ButtonGroup";
+import Select from "components/Controls/Select";
 import { addItem } from "features/MainList/reducer/slice";
 
-export default function AddItemForm(props) {
-	const dispatch = useDispatch();
+const optionsMock = [
+	{ value: "Fruits", name: "Fruits" },
+	{ value: "Apples", name: "Apples" },
+	{ value: "Banana", name: "Banana" },
+];
 
+export default function AddItemForm(props) {
 	const { setIsShoppingList } = props;
+
+	// < hooks >
+	const dispatch = useDispatch();
 
 	const firstInputRef = useRef(null);
 	const selectRef = useRef(null);
@@ -19,13 +27,12 @@ export default function AddItemForm(props) {
 	const [note, setNote] = useState("");
 	const [imageUrl, setImageUrl] = useState("");
 
-	const [categoryValue, setCategoryValue] = useState("");
-	const [query, setQuery] = useState("");
-
 	useEffect(() => {
 		firstInputRef.current.focus();
 	}, []);
+	// </ hooks >
 
+	// < UI >
 	const UI = (
 		<FormS>
 			<h3>Add a new item</h3>
@@ -73,30 +80,13 @@ export default function AddItemForm(props) {
 			</FormGroup>
 
 			<FormGroup controlId="category">
-				<Input
+				<Select
 					ref={selectRef}
-					type="select"
 					label="Category"
-					placeholder="Enter a category"
 					variant="outline"
-					value={categoryValue || query}
+					placeholder="Enter a category"
 					fullWidth
-					opts={["Fruits", "Apples", "Banana"]}
-					query={query}
-					onChange={(e) => {
-						e.preventDefault();
-
-						setQuery(e.target.value);
-					}}
-					onClick={(e) => {
-						e.preventDefault();
-						setQuery("");
-						setCategoryValue(null);
-					}}
-					onSelectOptsClick={(e) => {
-						e.preventDefault();
-						setCategoryValue(e.target.dataset.value);
-					}}
+					options={optionsMock}
 				/>
 			</FormGroup>
 
@@ -119,7 +109,7 @@ export default function AddItemForm(props) {
 							name,
 							note,
 							imageUrl,
-							category: categoryValue,
+							category: selectRef.current.value,
 						};
 
 						dispatch(addItem(newItem));

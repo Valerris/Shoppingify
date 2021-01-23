@@ -2,12 +2,32 @@ import { useEffect, useRef } from "react";
 import PageContainer from "common/PageContainer";
 import FormGroup from "components/FormGroup";
 import Input from "components/playground/Controls/Input";
+import Select from "components/playground/Controls/Select";
+
+const mock = [
+	{
+		value: "Option 1",
+		name: "Option 1",
+	},
+	{
+		value: "Option 2",
+		name: "Option 2",
+	},
+	{
+		value: "Option 3",
+		name: "Option 3",
+	},
+	{
+		value: "Test 1",
+		name: "Test 1",
+	},
+];
 
 export default function PlaygroundPage() {
 	const ref = useRef(null);
 
 	useEffect(() => {
-		ref.current.focus();
+		ref && ref.current?.focus();
 	}, []);
 
 	const UI = (
@@ -22,17 +42,27 @@ export default function PlaygroundPage() {
 				}}
 			>
 				<div>
-					{/* <FormGroup controlId="input"> */}
-					<Input
-						ref={ref}
-						label="Label"
-						id="input"
-						autofocus
-						variant="outline"
-						size="sm"
-						startIcon="search"
-					/>
-					{/* </FormGroup> */}
+					{/* <FormGroup controlId="input">
+						<Input
+							ref={ref}
+							label="Label"
+							id="input"
+							autofocus
+							variant="outline"
+							size="sm"
+							startIcon="search"
+						/>
+					</FormGroup> */}
+
+					<FormGroup controlId="select">
+						<Select
+							label="Label"
+							hint="Hint"
+							size="sm"
+							variant="outline"
+							options={mock}
+						/>
+					</FormGroup>
 				</div>
 			</div>
 		</PageContainer>
