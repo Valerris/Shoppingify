@@ -7,14 +7,28 @@ import Checkbox from "components/Controls/Checkbox";
 import { STATUSES } from "features/ShoppingList/reducer/slice";
 
 function ShoppingListItem(props) {
-	const { id, category, item, count, listStatus } = props;
+	const {
+		id,
+		category,
+		item,
+		count,
+		checked,
+		checkboxChangeHandler,
+		listStatus,
+	} = props;
 
 	// < UI >
 	const ItemCmp = <ShoppingListItemS>{item}</ShoppingListItemS>;
 
 	const itemUI =
 		listStatus === STATUSES.adjust ? (
-			<Checkbox id={id}>{ItemCmp}</Checkbox>
+			<Checkbox
+				id={id}
+				checked={checked}
+				onChange={checkboxChangeHandler}
+			>
+				{ItemCmp}
+			</Checkbox>
 		) : (
 			ItemCmp
 		);

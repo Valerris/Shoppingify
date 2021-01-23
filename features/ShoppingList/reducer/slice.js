@@ -48,6 +48,17 @@ const slice = createSlice({
 				itemObj.count--;
 			}
 		},
+		toggleChecked(state, action) {
+			const { id, category } = action.payload;
+
+			const list = state.list;
+
+			const categoryObj = findCategoryObj(list, category);
+
+			const itemObj = findItemById(categoryObj.items, id);
+
+			itemObj.checked = !itemObj.checked;
+		},
 		addItem(state, action) {
 			const { category, item } = action.payload;
 
@@ -56,9 +67,9 @@ const slice = createSlice({
 			const categoryObj = findCategoryObj(list, category.name);
 
 			if (categoryObj) {
-				categoryObj.items.push(item);
+				categoryObj.items.push({ ...item, checked: true });
 			} else {
-				list.push({ category, items: [item] });
+				list.push({ category, items: [{ ...item, checked: true }] });
 			}
 		},
 		removeItem(state, action) {
@@ -100,6 +111,7 @@ const slice = createSlice({
 export const {
 	incCount,
 	decCount,
+	toggleChecked,
 	addItem,
 	removeItem,
 	addTitle,

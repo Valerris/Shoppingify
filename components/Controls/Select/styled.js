@@ -20,8 +20,8 @@ export const OptionsContainerS = styled.ul`
 	z-index: ${indexes[1]};
 `;
 
-export const OptionS = styled.li.attrs((props) => ({
-	tabIndex: 1,
+export const OptionS = styled.li.attrs(() => ({
+	tabIndex: 0,
 }))`
 	all: unset;
 	display: block;

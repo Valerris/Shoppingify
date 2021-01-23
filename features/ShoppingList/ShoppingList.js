@@ -1,4 +1,4 @@
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import {
 	ShoppingListS,
 	ShoppingListHeaderS,
@@ -6,11 +6,19 @@ import {
 } from "./styled";
 import ShoppingListItem from "features/ShoppingList/components/ShoppingListItem";
 import Button from "components/Button";
+import { toggleChecked } from "features/ShoppingList/reducer/slice";
 
 export default function ShoppingList() {
 	// < hooks >
+	const dispatch = useDispatch();
 	const { shoppingList } = useSelector((state) => state);
 	// </ hooks >
+
+	// < handlers >
+	function checkboxChangeHandler(id, category) {
+		dispatch(toggleChecked({ id, category }));
+	}
+	// </ handlers >
 
 	// < UI >
 	const hasItems = shoppingList.list.length > 0;
@@ -27,6 +35,12 @@ export default function ShoppingList() {
 								id={item._id}
 								item={item.name}
 								count={item.count}
+								checked={item.checked}
+								checkboxChangeHandler={checkboxChangeHandler.bind(
+									null,
+									item._id,
+									el.category.name
+								)}
 								category={el.category.name}
 								listStatus={shoppingList.status}
 							/>

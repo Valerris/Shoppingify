@@ -7,13 +7,19 @@ import {
 import FormLabel from "components/FormLabel";
 
 function Checkbox(props, ref) {
-	const { id, children } = props;
+	const { id, defaultChecked, checked, children, onChange } = props;
 
 	// < UI >
 	const UI = (
 		<CheckboxContainerS>
 			<FormLabel htmlFor={id}>
-				<CheckboxS ref={ref} id={id} />
+				<CheckboxS
+					ref={ref}
+					id={id}
+					defaultChecked={defaultChecked}
+					checked={checked}
+					onChange={onChange}
+				/>
 				<CheckboxCheckMarkS />
 
 				{children && <span>{children}</span>}
