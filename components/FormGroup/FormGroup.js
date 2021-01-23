@@ -13,7 +13,7 @@ export default function FormGroup(props) {
 		isFocused: false,
 	});
 
-	const ctxHandler = useCallback((ctx) => setCtx(ctx), []);
+	const ctxHandler = useCallback((ctxCb) => setCtx(ctxCb), []);
 
 	const UI = (
 		<FormGroupS noMargin={noMargin}>
