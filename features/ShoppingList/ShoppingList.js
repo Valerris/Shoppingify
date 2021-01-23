@@ -8,8 +8,11 @@ import ShoppingListItem from "features/ShoppingList/components/ShoppingListItem"
 import Button from "components/Button";
 
 export default function ShoppingList() {
+	// < hooks >
 	const { shoppingList } = useSelector((state) => state);
+	// </ hooks >
 
+	// < UI >
 	const hasItems = shoppingList.list.length > 0;
 
 	const shoppingListUI = hasItems
@@ -25,6 +28,7 @@ export default function ShoppingList() {
 								item={item.name}
 								count={item.count}
 								category={el.category.name}
+								listStatus={shoppingList.status}
 							/>
 						))}
 					</ShoppingListCategoryS>

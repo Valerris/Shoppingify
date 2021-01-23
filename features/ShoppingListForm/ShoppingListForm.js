@@ -10,19 +10,24 @@ import {
 	addTitle,
 	removeTitle,
 	changeStatus,
+	clear,
 } from "features/ShoppingList/reducer/slice";
+import { addShoppingList } from "features/ShoppingListsHistory/reducer/slice";
+import { makeAllItemsVisible } from "features/MainList/reducer/slice";
 
 export default function ShoppingListForm() {
+	// < hooks >
 	const dispatch = useDispatch();
-
-	const { status, list } = useSelector((state) => state.shoppingList);
+	const { shoppingList } = useSelector((state) => state);
 	const [value, setValue] = useState("");
+	// </ hooks >
 
-	const hasNoLength = !list.length;
+	// < UI >
+	const hasNoLength = !shoppingList.list.length;
 
 	const UI = (
 		<ShoppingListFormS>
-			{status === STATUSES.adjust ? (
+			{shoppingList.status === STATUSES.adjust ? (
 				<ButtonGroup>
 					<Button
 						variant="text"
@@ -30,8 +35,17 @@ export default function ShoppingListForm() {
 							e.preventDefault();
 
 							dispatch(removeTitle());
-
-							dispatch(changeStatus({ status: STATUSES.edit }));
+							dispatch(changeStatus({ status: STATUSES.canceled }));
+							dispatch(
+								addShoppingList({
+									shoppingList: {
+										...shoppingList,
+										status: STATUSES.canceled,
+									},
+								})
+							);
+							dispatch(clear());
+							dispatch(makeAllItemsVisible());
 						}}
 					>
 						cancel
@@ -39,7 +53,19 @@ export default function ShoppingListForm() {
 
 					<Button
 						color="secondary"
-						onClick={(e) => e.preventDefault()}
+						onClick={(e) => {
+							dispatch(changeStatus({ status: STATUSES.completed }));
+							dispatch(
+								addShoppingList({
+									shoppingList: {
+										...shoppingList,
+										status: STATUSES.completed,
+									},
+								})
+							);
+							dispatch(clear());
+							dispatch(makeAllItemsVisible());
+						}}
 					>
 						Complete
 					</Button>
@@ -53,8 +79,6 @@ export default function ShoppingListForm() {
 							placeholder="Enter a name"
 							value={value}
 							onChange={(e) => {
-								e.preventDefault();
-
 								const {
 									target: { value },
 								} = e;
@@ -69,10 +93,7 @@ export default function ShoppingListForm() {
 						color="primary"
 						type="submit"
 						onClick={(e) => {
-							e.preventDefault();
-
 							dispatch(addTitle({ title: value }));
-
 							dispatch(changeStatus({ status: STATUSES.adjust }));
 
 							setValue("");

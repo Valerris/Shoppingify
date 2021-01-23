@@ -4,15 +4,23 @@ import {
 } from "./styled";
 import CountToggle from "features/ShoppingList/components/CountToggle";
 import Checkbox from "components/Controls/Checkbox";
+import { STATUSES } from "features/ShoppingList/reducer/slice";
 
 function ShoppingListItem(props) {
-	const { id, category, item, count } = props;
+	const { id, category, item, count, listStatus } = props;
 
+	// < UI >
+	const ItemCmp = <ShoppingListItemS>{item}</ShoppingListItemS>;
+
+	const itemUI =
+		listStatus === STATUSES.adjust ? (
+			<Checkbox id={id}>{ItemCmp}</Checkbox>
+		) : (
+			ItemCmp
+		);
 	const UI = (
 		<ShoppingListItemContainerS>
-			<Checkbox id={id}>
-				<ShoppingListItemS>{item}</ShoppingListItemS>
-			</Checkbox>
+			{itemUI}
 
 			<CountToggle count={count} id={id} category={category} />
 		</ShoppingListItemContainerS>

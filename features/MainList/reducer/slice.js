@@ -172,6 +172,13 @@ const slice = createSlice({
 
 			itemObj.isVisible = !itemObj.isVisible;
 		},
+		makeAllItemsVisible(state, action) {
+			state.forEach((el) => {
+				el.items.forEach((elem) => {
+					elem.isVisible = true;
+				});
+			});
+		},
 	},
 });
 
@@ -179,6 +186,7 @@ export const {
 	addItem,
 	removeItem,
 	toggleVisibility,
+	makeAllItemsVisible,
 } = slice.actions;
 
 export default slice.reducer;

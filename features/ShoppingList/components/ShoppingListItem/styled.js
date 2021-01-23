@@ -5,7 +5,7 @@ const { sizes } = theme;
 
 export const ShoppingListItemContainerS = styled.div`
 	display: flex;
-	align-items: flex-start;
+	align-items: center;
 	justify-content: space-between;
 	flex-wrap: wrap;
 	width: 100%;

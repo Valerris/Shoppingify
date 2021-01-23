@@ -10,7 +10,8 @@ const SLICE_NAME = "SHOPPING_LIST";
 export const STATUSES = {
 	edit: "EDIT",
 	adjust: "ADJUST",
-	complete: "COMPLETE",
+	completed: "COMPLETED",
+	canceled: "CANCELED",
 };
 
 const initialState = {
@@ -88,6 +89,11 @@ const slice = createSlice({
 
 			state.status = status;
 		},
+		clear(state, action) {
+			state.title = undefined;
+			state.status = STATUSES.edit;
+			state.list = [];
+		},
 	},
 });
 
@@ -99,6 +105,7 @@ export const {
 	addTitle,
 	removeTitle,
 	changeStatus,
+	clear,
 } = slice.actions;
 
 export default slice.reducer;
