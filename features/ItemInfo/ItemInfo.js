@@ -2,6 +2,7 @@ import { useRouter } from "next/router";
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import Button from "components/Button";
+import GoBack from "components/GoBack";
 import ButtonGroup from "components/ButtonGroup";
 import {
 	ItemInfoContainerS,
@@ -14,10 +15,11 @@ import { addItem } from "features/ShoppingList/reducer/slice";
 import { removeItem } from "features/MainList/reducer/slice";
 
 export default function ItemInfo(props) {
+	const { setIsShoppingList } = props;
+
+	// < hooks >
 	const router = useRouter();
 	const dispatch = useDispatch();
-
-	const { setIsShoppingList } = props;
 	const { items } = useSelector((state) => state);
 	const [itemInfo, setItemInfo] = useState(null);
 
@@ -39,26 +41,18 @@ export default function ItemInfo(props) {
 				}
 			});
 	}, [router.query]);
+	// </ hooks >
 
+	// < UI >
 	const UI = itemInfo && (
 		<ItemInfoContainerS>
-			<Button
-				variant="text"
-				color="primary"
-				size="sm"
-				startIcon="keyboard_backspace"
-				iconVariant="round"
-				noPadding
-				onClick={(e) => {
-					e.preventDefault();
-
+			<GoBack
+				onClick={() => {
 					router.replace({});
 
 					setIsShoppingList();
 				}}
-			>
-				back
-			</Button>
+			/>
 
 			<ItemInfoImgContainerS>
 				<img src={itemInfo.imgUrl} alt="abacate" />
