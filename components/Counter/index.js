@@ -1,1 +1,11 @@
-export { default } from "./Counter";
+import { CounterS } from "./styled";
+
+function Counter(props) {
+	const { children } = props;
+
+	const UI = <CounterS>{children || "0"}</CounterS>;
+
+	return UI;
+}
+
+export default Counter;
