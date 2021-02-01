@@ -7,10 +7,6 @@ const { sizes } = theme;
 export const ItemInfoContainerS = styled.div`
 	min-width: 77.5rem;
 
-	& > button {
-		margin-bottom: 8.5rem;
-	}
-
 	& h3 {
 		margin-bottom: 8.5rem;
 	}

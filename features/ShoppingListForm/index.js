@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { FormS, ShoppingListFormS } from "./styled";
 import ButtonGroup from "components/ButtonGroup";
@@ -12,7 +12,7 @@ import {
 	changeStatus,
 	clear,
 } from "features/ShoppingList/reducer/slice";
-import { addShoppingList } from "features/ShoppingListsHistory/reducer/slice";
+import { addShoppingList } from "features/ShoppingListHistory/reducer/slice";
 import { makeAllItemsVisible } from "features/MainList/reducer/slice";
 
 export default function ShoppingListForm() {

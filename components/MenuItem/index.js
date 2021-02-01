@@ -4,13 +4,20 @@ import Tippy from "@tippyjs/react";
 import "tippy.js/dist/tippy.css";
 
 function MenuItem(props) {
-	const { href, icon, active = false, tooltip, children } = props;
+	const {
+		href,
+		icon,
+		active = false,
+		tooltip,
+		children,
+		onClick,
+	} = props;
 
 	const Cmp = (
 		<MenuItemWrapperS>
 			<Link href={href}>
 				<a>
-					<MenuItemS active={active}>
+					<MenuItemS active={active} onClick={onClick}>
 						{icon ? (
 							<i className="material-icons-round">{icon}</i>
 						) : (

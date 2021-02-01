@@ -5,23 +5,35 @@ import Aside from "common/Aside";
 import H1 from "common/H1";
 import Menu from "features/Menu";
 import CartCounter from "features/CartCounter";
-import SearchForm from "features/SearchForm";
-import MainList from "features/MainList";
 import Banner from "features/Banner";
 import ShoppingList from "features/ShoppingList";
 import ShoppingListForm from "features/ShoppingListForm";
 import AddItemForm from "features/AddItemForm";
 import ItemInfo from "features/ItemInfo";
+import ShoppingListHistory from "features/ShoppingListHistory";
+import ShoppingListHistoryItem from "features/ShoppingListHistoryItem";
 import Logo from "components/Logo";
+import GoBack from "components/GoBack";
 
 import init from "pages/reducer/init";
 import types from "pages/reducer/actionTypes";
 import reducer from "pages/reducer/reducer";
 
-export default function Home() {
-	const [state, dispatch] = useReducer(reducer, init);
+export default function HistoryPage() {
+	// < hooks >
+	const [
+		{
+			isAddItemVisible,
+			isItemInfoVisible,
+			isHistoryListVisible,
+			isHistoryItemInfoVisible,
+		},
+		dispatch,
+	] = useReducer(reducer, init);
+	// </ hooks >
 
-	return (
+	// < UI >
+	const UI = (
 		<>
 			<Toolbar>
 				<Logo />
@@ -32,28 +44,34 @@ export default function Home() {
 			</Toolbar>
 
 			<PageContainer pageTitle="Shoppingify">
-				<header>
-					<H1>
-						<span className="colored_span">Shoppingify</span> allows
-						you take your shopping list wherever you go
-					</H1>
-
-					<SearchForm />
-				</header>
-				<main>
-					<MainList
-						setIsItemInfo={(e) => {
-							dispatch({ type: types.ITEM_INFO_VISIBLE });
-						}}
-						setIsShoppingList={(e) => {
-							dispatch();
+				{isHistoryItemInfoVisible && (
+					<GoBack
+						onClick={() => {
+							dispatch({ type: types.HISTORY_LIST_VISIBLE });
 						}}
 					/>
+				)}
+
+				{isHistoryListVisible && (
+					<header>
+						<H1>Shopping history</H1>
+					</header>
+				)}
+				<main>
+					{isHistoryListVisible && (
+						<ShoppingListHistory
+							setIsHistoryItemInfo={(e) => {
+								dispatch({ type: types.HISTORY_ITEM_INFO_VISIBLE });
+							}}
+						/>
+					)}
+
+					{isHistoryItemInfoVisible && <ShoppingListHistoryItem />}
 				</main>
 			</PageContainer>
 
 			<Aside>
-				{state.isAddItemVisible ? (
+				{isAddItemVisible ? (
 					<div>
 						<AddItemForm
 							setIsShoppingList={(e) => {
@@ -61,7 +79,7 @@ export default function Home() {
 							}}
 						/>
 					</div>
-				) : state.isItemInfoVisible ? (
+				) : isItemInfoVisible ? (
 					<div>
 						<ItemInfo
 							setIsShoppingList={(e) => {
@@ -87,4 +105,6 @@ export default function Home() {
 			</Aside>
 		</>
 	);
+
+	return UI;
 }

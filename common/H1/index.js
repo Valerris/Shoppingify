@@ -1,12 +1,7 @@
-import { H1S, SpanS } from "./styled";
+export default function H1(props) {
+	const { children } = props;
 
-export default function H1() {
-	const UI = (
-		<h1>
-			<SpanS>Shoppingify</SpanS> allows you take your shopping list
-			wherever you go
-		</h1>
-	);
+	const UI = <h1>{children}</h1>;
 
 	return UI;
 }

@@ -47,6 +47,7 @@ const sizes = {
 	},
 
 	radius1: "1rem",
+	radius10: "2rem",
 	radius2: "3rem",
 	radius3: "6rem",
 	radius50: "50%",

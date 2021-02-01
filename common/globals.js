@@ -13,7 +13,7 @@ const GlobalStyled = createGlobalStyle`
     *,
     *::before,
     *::after {
-        box-sizing: inherit;
+        box-sizing: inherit;        
     }
 
     html,
@@ -87,10 +87,9 @@ const GlobalStyled = createGlobalStyle`
         text-decoration: none;
     }
 
-    * {
-        box-sizing: border-box;
+    .colored_span {
+        color: ${colors.orange0};
     }
-
 `;
 
 export default GlobalStyled;

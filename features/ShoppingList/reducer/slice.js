@@ -11,7 +11,7 @@ export const STATUSES = {
 	edit: "EDIT",
 	adjust: "ADJUST",
 	completed: "COMPLETED",
-	canceled: "CANCELED",
+	canceled: "CANCELLED",
 };
 
 const initialState = {

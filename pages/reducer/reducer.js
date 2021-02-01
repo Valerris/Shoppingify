@@ -16,6 +16,18 @@ export default function reducer(state, action = { type: "INIT" }) {
 				isItemInfoVisible: true,
 			};
 
+		case types.HISTORY_LIST_VISIBLE:
+			return {
+				isHistoryListVisible: true,
+				isHistoryItemInfoVisible: false,
+			};
+
+		case types.HISTORY_ITEM_INFO_VISIBLE:
+			return {
+				isHistoryListVisible: false,
+				isHistoryItemInfoVisible: true,
+			};
+
 		default:
 			return {
 				isAddItemVisible: false,
