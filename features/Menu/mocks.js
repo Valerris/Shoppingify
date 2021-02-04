@@ -17,7 +17,7 @@ export const MENU_ITEMS = [
 	},
 	{
 		_id: uuid(),
-		href: "/#",
+		href: "/statistics",
 		icon: "insert_chart_outlined",
 		tooltip: "statistics",
 		active: false,
