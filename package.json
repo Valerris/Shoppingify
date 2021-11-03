@@ -33,6 +33,6 @@
 		"recharts": "^2.0.4",
 		"styled-components": "^5.2.1",
 		"uuid": "^8.3.2",
-		"validator": "^13.5.1"
+		"validator": "^13.7.0"
 	}
 }
